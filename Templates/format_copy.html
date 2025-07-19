@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nutrition Calculator</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='design1.css')}}"/>
+
+  <script>
+    function toggleInputSections(triggeredId) {
+      const recipeInput = document.getElementById("recipeInput");
+      const servingSize = document.getElementById("servingSize");
+      const ingredientInputs = document.querySelectorAll(".ingredientInput, .quantityInput, .unitSelect");
+
+      // If recipe is filled
+      if (triggeredId === "recipeInput" && recipeInput.value.trim() !== "") {
+        ingredientInputs.forEach(el => {
+          el.disabled = true;
+          if (el.tagName === "INPUT") el.value = "";
+        });
+        servingSize.disabled = false;
+      }
+
+      // If ingredient is filled
+      else if (triggeredId === "ingredientInput" && document.getElementById("ingredientInput").value.trim() !== "") {
+        recipeInput.disabled = true;
+        recipeInput.value = "";
+        servingSize.disabled = true;
+        servingSize.value = "";
+      }
+
+      // Re-enable everything if both are empty
+      if (
+        recipeInput.value.trim() === "" &&
+        document.getElementById("ingredientInput").value.trim() === ""
+      ) {
+        recipeInput.disabled = false;
+        ingredientInputs.forEach(el => el.disabled = false);
+        servingSize.disabled = true;
+        servingSize.value = "";
+      }
+    }
+
+    function addField() {
+    const container = document.getElementById("ingredients");
+
+    const row = document.createElement("div");
+    row.className = "ingredientRow";
+
+    const ing = document.createElement("input");
+    ing.type = "text";
+    ing.name = "ingredient";
+    ing.placeholder = "Enter ingredient";
+    ing.className = "ingredientInput";
+
+    const qty = document.createElement("input");
+    qty.type = "text";
+    qty.name = "quantity";
+    qty.placeholder = "Enter quantity";
+    qty.className = "quantityInput";
+
+    const unit = document.createElement("select");
+    unit.name = "unit";
+    unit.className = "unitSelect";
+
+    const options = ["tsp", "tbsp", "cup", "gm", "mL", "L", "kg", "pound", "pinch", "dash", "drop"];
+    options.forEach(val => {
+    const opt = document.createElement("option");
+    opt.value = val;
+    opt.text = val;
+    unit.appendChild(opt);
+  });
+
+  row.appendChild(ing);
+  row.appendChild(qty);
+  row.appendChild(unit);
+  row.appendChild(document.createElement("br"));
+
+  container.appendChild(row);
+}
+
+    function setFormAction() {
+      const recipe = document.getElementById("recipeInput").value.trim();
+      const ingredient = document.getElementById("ingredientInput").value.trim();
+      const form = document.getElementById("nutritionForm");
+
+      if (recipe !== "" && ingredient === "") {
+        form.action = "/searchrecipe";
+      } 
+      else if (ingredient !== "" && recipe === "") {
+        form.action = "/format";
+      } 
+      else {
+        alert("Please fill either recipe name or at least one ingredient");
+        return false;
+      }
+
+      return true;
+    }
+
+    function removeLastField() {
+    const container = document.getElementById("ingredients");
+    const rows = container.querySelectorAll(".ingredientRow");
+
+    if (rows.length > 0) {
+    container.removeChild(rows[rows.length - 1]);
+  }
+  }
+  </script>
+</head>
+<body>
+
+  <h1>Nutrition Calculator</h1>
+  <br> 
+  <form id="nutritionForm" method="POST" onsubmit="return setFormAction()">
+
+    <!-- Recipe Name -->
+    <div class="recipe-section"></div>
+    <label>Recipe Name:</label><br>
+    <input type="text" id="recipeInput" name="recipe" placeholder="Enter recipe name" oninput="toggleInputSections('recipeInput')">
+    </div>
+
+    <!-- Serving Size --> <!-- this is of type number, hence it appears that way on the website -->
+    <input type="number" id="servingSize" name="serving_size" min="1" placeholder="Enter serving size">
+    <br><br>
+
+    <!-- Ingredients -->
+    <label>Ingredients:</label><br>
+    <div id="ingredients">
+      <input type="text" id="ingredientInput" name="ingredient" placeholder="Enter ingredient" class="ingredientInput" oninput="toggleInputSections('ingredientInput')">
+      <input type="text" name="quantity" placeholder="Quantity" class="quantityInput">
+      <select name="unit" class="unitSelect">
+        <option value="tsp">tsp</option>
+        <option value="tbsp">tbsp</option>
+        <option value="cup">cup</option>
+        <option value="gm">gm</option>
+        <option value="mL">mL</option>
+        <option value="L">L</option>
+        <option value="kg">kg</option>
+        <option value="pound">pound</option>
+        <option value="pinch">pinch</option>
+        <option value="dash">dash</option>
+        <option value="drop">drop</option>
+      </select>
+      <br>
+    </div>
+    <button type="button" onclick="addField()">Add Ingredient +</button>
+    <button type="button" onclick="removeLastField()">Remove Ingredient −</button>
+
+    <br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mutually Exclusive Textboxes</title>
+  <script>
+    function checkExclusivity(changedInputId) {
+      const inputs = [
+        document.getElementById("input1"),
+        document.getElementById("input2"),
+        document.getElementById("input3")
+      ];
+
+      const changedInput = document.getElementById(changedInputId);
+
+      if (changedInput.value.trim() !== "") {
+        // Disable all others
+        inputs.forEach(input => {
+          if (input.id !== changedInputId) {
+            input.disabled = true;
+            input.value = "";
+          }
+        });
+      } else {
+        // Re-enable all if nothing is filled
+        let anyFilled = inputs.some(input => input.value.trim() !== "");
+        if (!anyFilled) {
+          inputs.forEach(input => input.disabled = false);
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <label>Option 1:</label>
+  <input type="text" id="input1" oninput="checkExclusivity('input1')"><br><br>
+
+  <label>Option 2:</label>
+  <input type="text" id="input2" oninput="checkExclusivity('input2')"><br><br>
+
+  <label>Option 3:</label>
+  <input type="text" id="input3" oninput="checkExclusivity('input3')"><br><br>
+
+</body>
+</html>

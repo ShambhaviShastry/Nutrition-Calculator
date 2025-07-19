@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Form</title>
+  <script>
+    function addField() {
+        const firstPhone = document.querySelector('.phoneField');
+        const newPhone = document.createElement('div');
+        newPhone.classList.add('phoneField');
+        newPhone.innerHTML = firstPhone.innerHTML;
+        document.getElementById('phoneFields').appendChild(newPhone);
+        document.querySelector('.phoneField:last-child input').focus();
+    }
+  </script>
+</head>
+<body>
+  <h2>Dynamic Form Example</h2>
+  <form action = "/recipe" method="POST">
+    <div id="fields" class = "form-group">
+      <label>Recipe</label>
+      <input type="text" name="item" placeholder="Enter value"><br>
+    </div>
+    <button type="button" onclick="addField()">Add More</button>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

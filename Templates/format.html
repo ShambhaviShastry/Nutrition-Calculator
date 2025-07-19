@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<title> Sign-up </title>
+<link rel = "stylesheet" href = "{{url_for ('static', filename = 'design1.css')}}"/>
+
+<script>
+    function addField() {
+      const container = document.getElementById("ingredients");
+
+      const select = document.createElement("select");
+      select.name = "unit";
+      const input = document.createElement("input");                                                                                       // the "input" is actually referring to a html tag
+      input.type = "text";
+      input.name = "ingredient";
+      input.placeholder = "Enter ingredient";
+      input.style = "font-family: Segoe UI";
+
+      const quant = document.createElement("input");
+      quant.type = "text";
+      quant.name = "quantity";
+      quant.placeholder = "Enter quantity";
+      quant.style = "font-family: Segoe UI";
+
+      const options = [ // this creates an array of options
+      { value: "tsp", text: "tsp" },
+      { value: "tbsp", text: "tbsp" },
+      { value: "cup", text: "cup" },
+      { value: "gm", text: "gm" },
+      { value: "mL", text: "mL" },
+      { value: "L", text: "L" },
+      { value: "kg", text: "kg" },
+      { value: "pound", text: "pound" },
+      { value: "pinch", text: "pinch" },
+      { value: "dash", text: "dash" },
+      { value: "drop", text: "drop" }
+      ];
+
+      options.forEach(opt => { // goes through each of the options in the above array and the value and text of each are given the respective values as given in the array
+        const option = document.createElement("option");
+        option.value = opt.value;
+        option.text = opt.text;
+        select.appendChild(option);
+      });
+
+      container.appendChild(input);
+      container.appendChild(quant);
+      container.appendChild(select);
+      container.appendChild(document.createElement("br"));
+    }
+</script>
+
+<body>
+<div class nutritional-label>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+        <h1> Nutrition Calculator </h1>
+        <hr>
+
+        <form action="/format" method="POST">
+
+          <div class="form-group">
+            <label> Recipe Name </label>
+            <div id = "recipes">
+            <input class type="form-control" type="text" name="recipe" style="font-family: Segoe UI" placeholder = "Enter recipe name">
+          </div>
+        
+          <div class="form-group">
+            <label>Ingredients</label>
+            <div id="ingredients">
+            <input type="text" name="ingredient" placeholder="Enter ingredient" style="font-family: Segoe UI">
+
+            <input type="text" name="quantity" placeholder="Enter quantity" style="font-family: Segoe UI">
+            <select name="unit">
+              <option value="tsp">tsp</option>
+              <option value="tbsp">tbsp</option>
+              <option value="cup">cup</option>
+              <option value="gm">gm</option>
+              <option value="mL">mL</option>
+              <option value="L">L</option>
+              <option value="kg">kg</option>
+              <option value="pound">pound</option>
+              <option value="pinch">pinch</option>
+              <option value="dash">dash</option>
+              <option value="drop">drop</option>
+            </select>
+            <br>
+            </div>
+            <button type="button" onclick="addField()">Add Ingredient +</button>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
