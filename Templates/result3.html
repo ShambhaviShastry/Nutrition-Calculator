@@ -1,71 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Nutrition Facts</title>
-    <link rel="stylesheet" href="{{url_for ('static', filename = 'design2.css')}}">
-</head>
-<body>
-    <div class="nutrition-box">
-        <h1>Nutrition Facts</h1>
-        <h2>Serving Size: {{ serving_size }}</h2>
-        <div class="divider thick"></div>
-
-        <div class="calories-line">
-            <span>Calories</span>
-            <span>{{ calorie }}</span>
+<html>
+<link rel = "stylesheet" href = "/static/design2.css"/>
+    <body>
+        <div class = "box">
+        <h1> Nutrition Facts </h1>
+        <h2> Serving Size: {{ serving_size }} </h2>
+        <hr>
+        <h1>Recipe Name: {{ recipe }} </h1>
+        <h2>Calories: {{ calorie }} </h2>
+        <h2>Total Fat: {{ total_fat }} </h2>
+        <h3>    Saturated Fat: {{ saturated_fat }} </h3>
+        <h2>Cholesterol: {{ cholesterol }} </h2>
+        <h2>Sodium: {{ sodium }} </h2>
+        <h2>Total Carbohydrate: {{ carbs }} </h2>
+        <h3>    Dietary Fiber: {{ fiber }} </h3>
+        <h3>    Total Sugars: {{ sugar }} </h3>
+        <h2>Protein: {{ protein }} </h2>
+        <h2>Vitamin A: {{ vitamin_a }} </h2>
+        <h2>Vitamin A: {{ vitamin_c }} </h2>
+        <h2>Calcium: {{ calcium }} </h2>
+        <h2>Iron: {{ iron }} </h2>
         </div>
-
-        <div class="divider"></div>
-        <p class="daily-label">% Daily Value*</p>
-
-        <div class="nutrient">
-            <span>Total Fat {{ total_fat }}g</span>
-            <span>--%</span>
-        </div>
-        <div class="sub-nutrient">
-            <span>Saturated Fat {{ saturated_fat }}g</span>
-            <span>--%</span>
-        </div>
-
-        <div class="nutrient">
-            <span>Cholesterol {{ cholesterol }}mg</span>
-            <span>--%</span>
-        </div>
-
-        <div class="nutrient">
-            <span>Sodium {{ sodium }}mg</span>
-            <span>--%</span>
-        </div>
-
-        <div class="nutrient">
-            <span>Total Carbohydrate {{ carbs }}g</span>
-            <span>--%</span>
-        </div>
-        <div class="sub-nutrient">
-            <span>Dietary Fiber {{ fiber }}g</span>
-            <span>--%</span>
-        </div>
-        <div class="sub-nutrient">
-            <span>Sugars {{ sugar }}g</span>
-        </div>
-
-        <div class="nutrient">
-            <span>Protein {{ protein }}g</span>
-        </div>
-
-        <div class="divider thick"></div>
-
-        <div class="vitamins">
-            <span>Vitamin A {{ vitamin_a }}%</span>
-            <span>Vitamin C {{ vitamin_c }}%</span>
-        </div>
-        <div class="vitamins">
-            <span>Calcium {{ calcium }}%</span>
-            <span>Iron {{ iron }}%</span>
-        </div>
-
-        <p class="footnote">*Percent Daily Values are based on a 2,000 calorie diet.</p>
-    </div>
-</body>
+    </body>
 </html>
