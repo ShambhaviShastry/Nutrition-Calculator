@@ -6,12 +6,14 @@ body {
   font-size: 30px;
 }
 
-.navbar a {
+.navbar ul {
   font-family: "georgia", serif;
+  list-style-type: none;
   float: centre;
   color: black;
   text-align: center;
-  padding: 14px 20px;
+  padding: 0px;
   text-decoration: none;
   font-size: 40px;
+  background-color:rgb(250, 236, 220);
 }
